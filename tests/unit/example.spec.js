@@ -2,12 +2,8 @@ import { mount } from '@vue/test-utils'
 import App from './App.vue'
 
 
-function factory({data}= {data:{}}){
-  return mount(App,{
-   data(){
-    return data
-   }
-  })
+function factory(){
+ return mount(App)
 }
 
 describe('App', ()=>{
