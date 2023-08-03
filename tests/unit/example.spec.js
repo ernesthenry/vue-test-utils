@@ -1,9 +1,31 @@
 import { mount } from '@vue/test-utils'
 import App from './App.vue'
+import {createStore} from 'vuex'
+
+const createVuexstore =()=> {
+  return createStore({
+    state(){
+      return{
+        count:0
+      }
+    },
+    mutations:{
+      increment(state){
+        state.count+=1
+      }
+    }
+  })
+} 
 
 
 function factory(){
- return mount(App)
+  const store = createVuexstore()
+ return mount(App,{
+  global:{
+    plugins:[store]
+
+  }
+ })
 }
 
 describe('App', ()=>{

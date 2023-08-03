@@ -1,29 +1,27 @@
 <template>
-     <button @click='increment' />
-  <div v-if="count % 2 === 0">
-  Count:{{ count }}. Count is even
-  </div>
+  <button @click="increment" />
+  <div v-if="count % 2 === 0">Count:{{ count }}. Count is even</div>
 
-  <div v-if="count % 2 !== 0">
-  Count:{{ count }}. Count is odd
-  </div>
+  <div v-if="count % 2 !== 0">Count:{{ count }}. Count is odd</div>
 </template>
 
 <script>
-import {ref} from 'vue'
+import { computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
-    setup(){
-    const count = ref(0)
+  setup() {
+    const store = useStore();
+    const count = computed(() => store.state.count);
 
-    const increment = ()=>{
-      count.value+=1
-    }
+    const increment = () => {
+      store.commit('increment')
+    };
 
     return {
       count,
-      increment
-    }
+      increment,
+    };
   },
-}
+};
 </script>
