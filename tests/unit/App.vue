@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import { computed, inject } from "vue";
-
 export default {
 
     computed:{
