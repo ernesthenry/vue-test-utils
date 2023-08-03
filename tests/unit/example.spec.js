@@ -5,15 +5,10 @@ const App = {
 
   data(){
     return{
-      msg:'Hello'
-
+      count:0
     }
   },
-  props:{
-    count:{
-      type:Number
-    }
-  },
+ 
   template: `
   <div v-if="count % 2 === 0">
   Count:{{ count }}. Count is even
@@ -25,16 +20,23 @@ const App = {
   `
 }
 
-function factory(props){
+function factory({data}){
   return mount(App,{
-   props
+   data
   })
 }
 
 
 describe('App', ()=>{
   it('render count when even', () =>{
-    const wrapper=factory({count:2})
+    const wrapper=factory({
+      data(){
+        return{
+          count:2
+        }
+      }
+    }
+    )
     console.log(wrapper.html())
     console.log(wrapper.vm)
     expect(wrapper.html()).toContain('Count:2. Count is even')
