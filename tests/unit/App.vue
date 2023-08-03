@@ -9,18 +9,17 @@
 import { computed, inject } from "vue";
 
 export default {
-  setup() {
-    const store = inject('store');
-    const count = computed(() => store.state.count);
 
-    const increment = () => {
-      store.commit('increment')
-    };
+    computed:{
+        count(){
+           return  this.$store.state.count
+        }
+    },
+    methods:{
+        increment(){
+            return this.$store.commit('increment')
+        }
+    },
 
-    return {
-      count,
-      increment,
-    };
-  },
 };
 </script>

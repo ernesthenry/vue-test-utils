@@ -20,17 +20,10 @@ const createVuexstore =()=> {
 
 
 function factory(){
-  const state = reactive({count:0})
+  const store=createVuexstore()
  return mount(App,{
   global:{
-    provide:{
-      'store':{
-        state,
-        commit:()=>{
-          state.count +=1
-        }
-      }
-    }
+    plugins:[store]
 
   }
  })
