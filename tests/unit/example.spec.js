@@ -1,20 +1,22 @@
 import { mount } from '@vue/test-utils'
-import {nextTick} from 'vue'
+import { nextTick, ref } from 'vue'
 
 
 const App = {
 
-  data(){
-    return{
-      count:0
+  setup(){
+    const count = ref(0)
+
+    const increment = ()=>{
+      count.value+=1
+    }
+
+    return {
+      count,
+      increment
     }
   },
 
-  methods:{
-    increment(){
-      this.count+=1
-    }
-  },
  
   template: `
   <button @click='increment' />
@@ -35,7 +37,6 @@ function factory({data}= {data:{}}){
    }
   })
 }
-
 
 describe('App', ()=>{
   it('render count when even', () =>{
