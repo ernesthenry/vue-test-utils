@@ -19,14 +19,29 @@ const App = {
 }
 
 
-test('App', ()=>{
-  const wrapper=mount(App,{
-    props:{
-      count:1
-    }
+describe('App', ()=>{
+  it('render count when even', () =>{
+    const wrapper=mount(App,{
+      props:{
+        count:2
+      }
+    })
+    console.log(wrapper.html())
+    // expect(wrapper.html()).toContain('Count:4')
+    expect(wrapper.html()).toContain('Count: 2. Count is even')
   })
-  console.log(wrapper.html())
-  // expect(wrapper.html()).toContain('Count:4')
-  expect(wrapper.html()).toContain('Count:1')
+
+
+  it('render count when odd', () =>{
+    const wrapper=mount(App,{
+      props:{
+        count:1
+      }
+    })
+    console.log(wrapper.html())
+    // expect(wrapper.html()).toContain('Count:4')
+    expect(wrapper.html()).toContain('Count: 1. Count is odd')
+  })
+
 
 })
