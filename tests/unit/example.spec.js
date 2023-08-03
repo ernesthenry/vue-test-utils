@@ -2,6 +2,13 @@ import { mount } from '@vue/test-utils'
 
 
 const App = {
+
+  data(){
+    return{
+      msg:'Hello'
+
+    }
+  },
   props:{
     count:{
       type:Number
@@ -18,29 +25,26 @@ const App = {
   `
 }
 
+function factory(props){
+  return mount(App,{
+   props
+  })
+}
+
 
 describe('App', ()=>{
   it('render count when even', () =>{
-    const wrapper=mount(App,{
-      props:{
-        count:2
-      }
-    })
+    const wrapper=factory({count:2})
     console.log(wrapper.html())
-    // expect(wrapper.html()).toContain('Count:4')
-    expect(wrapper.html()).toContain('Count: 2. Count is even')
+    console.log(wrapper.vm)
+    expect(wrapper.html()).toContain('Count:2. Count is even')
   })
 
 
   it('render count when odd', () =>{
-    const wrapper=mount(App,{
-      props:{
-        count:1
-      }
-    })
+    const wrapper=factory({count:1})
     console.log(wrapper.html())
-    // expect(wrapper.html()).toContain('Count:4')
-    expect(wrapper.html()).toContain('Count: 1. Count is odd')
+    expect(wrapper.html()).toContain('Count:1. Count is odd')
   })
 
 
