@@ -39,18 +39,13 @@ function factory({data}= {data:{}}){
 }
 
 describe('App', ()=>{
-  it('render count when even', () =>{
-    const wrapper=factory({
-      data:{
-          count:2
-  
-      }
-    }
-    )
-    console.log(wrapper.html())
-    console.log(wrapper.vm)
-    expect(wrapper.html()).toContain('Count:2. Count is even')
-  })
+  it('render count when even', async() =>{
+    const wrapper=factory()
+    await wrapper.find('button').trigger('click')
+    await wrapper.find('button').trigger('click')
+
+  expect(wrapper.html()).toContain('Count:2. Count is even')
+})
 
 
   it('render count when odd', async() =>{
