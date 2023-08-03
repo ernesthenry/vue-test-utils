@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import {reactive } from 'vue'
 import App from './App.vue'
 import {createStore} from 'vuex'
 
@@ -19,10 +20,17 @@ const createVuexstore =()=> {
 
 
 function factory(){
-  const store = createVuexstore()
+  const state = reactive({count:0})
  return mount(App,{
   global:{
-    plugins:[store]
+    provide:{
+      'store':{
+        state,
+        commit:()=>{
+          state.count +=1
+        }
+      }
+    }
 
   }
  })
