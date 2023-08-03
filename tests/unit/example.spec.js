@@ -22,7 +22,9 @@ const App = {
 
 function factory({data}){
   return mount(App,{
-   data
+   data(){
+    return data
+   }
   })
 }
 
@@ -30,10 +32,9 @@ function factory({data}){
 describe('App', ()=>{
   it('render count when even', () =>{
     const wrapper=factory({
-      data(){
-        return{
+      data:{
           count:2
-        }
+  
       }
     }
     )
@@ -44,7 +45,11 @@ describe('App', ()=>{
 
 
   it('render count when odd', () =>{
-    const wrapper=factory({count:1})
+      const wrapper=factory({
+        data:{
+            count:1
+        }
+      })
     console.log(wrapper.html())
     expect(wrapper.html()).toContain('Count:1. Count is odd')
   })
